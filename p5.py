@@ -7,7 +7,6 @@ What is the smallest positive number that is evenly divisible by all of the numb
 """
 
 from helper import *
-from functools import reduce
 
 
 def p5():

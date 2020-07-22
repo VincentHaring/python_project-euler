@@ -7,8 +7,6 @@ What is the 10,001st prime number?
 """
 
 from helper import *
-from functools import reduce
-
 
 def p7():
 	
