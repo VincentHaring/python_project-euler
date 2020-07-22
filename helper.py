@@ -58,6 +58,31 @@ def isPrime(n):
 	return False
 
 
+###################################################
+# Returns Sieve of Eratosthenes for a given integer
+###################################################
+def sieve(n):
+
+	a = [True] * (n-1)
+
+	for i in range(2, int(sqrt(n)+1)):
+
+		i_index = i-2
+
+		if a[i_index]:
+
+			j = i*i
+
+			while j <= n:
+
+				j_index = j-2
+				a[j_index] = False
+				j += i
+
+	return a
+
+
+
 
 ###############################################################################
 # Splits an integer into a list and sign, ( 1,234 becomes ([1, 2, 3, 4], "+") )
@@ -92,18 +117,11 @@ def splitInt(n):
 ###################################################
 def isPalindromic(l):
 
-	# TO-DO
-
-	pass
+	r = int(len(l)/2)
 
 	if len(l)%2 == 0:
 
-		r = int(len(l)/2) + 1
-
-	else:
-
-		r = int(len(l)/2)
-
+		r += 1
 
 	for i in range(r):
 
