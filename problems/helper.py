@@ -133,5 +133,15 @@ def isPalindromic(l):
 
 
 
+##############################################
+# Checks if a given number is a perfect square
+##############################################
+def isSquare(n):
+
+	return round(sqrt(n))**2 == n
+
+
+
+
 
 
