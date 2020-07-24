@@ -6,6 +6,7 @@ I'm sure there are existing libraries with these, but where's the fun in that.
 """
 
 from math import *
+import numpy as np
 
 ################################################################################
 # Takes integer n and returns list f of prime factors and p of powers of factors
@@ -56,6 +57,26 @@ def isPrime(n):
 		return True
 
 	return False
+
+
+
+#########################################
+# Returns all factors for a given integer
+#########################################
+def factors(n):
+
+	f = []
+
+	for i in range(1,n+1):
+
+		if n%i == 0:
+
+			f.append(i)
+
+	return f
+
+
+
 
 
 ###################################################
@@ -112,6 +133,25 @@ def splitInt(n):
 
 
 
+#############################################################
+# Returns a long from a list of numbers (reverse of splitInt)
+#############################################################
+def joinInt(s, l):
+
+	n = 0
+
+	m = 1
+
+	for i in range(len(l)-1,-1,-1):
+
+		n += l[i] * m
+		m *= 10
+
+	if s == '-':
+		return n * -1
+
+	return n
+
 ###################################################
 # Checks if a list reads same forwards as backwards
 ###################################################
@@ -139,6 +179,37 @@ def isPalindromic(l):
 def isSquare(n):
 
 	return round(sqrt(n))**2 == n
+
+
+
+#####################################################################
+# Reads numbers from a file into list of numbers (in splitInt format)
+#####################################################################
+def readNumbersIntoList(file):
+
+	f = open(file, 'r')
+
+	n = []
+
+
+	for l in f:
+
+		a = []
+
+		l = l.strip()
+
+		for c in l:
+
+			a.append(int(c))
+
+		n.append(a)
+
+	f.close()
+
+	return n
+
+
+
 
 
 
