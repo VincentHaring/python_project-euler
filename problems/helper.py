@@ -114,8 +114,8 @@ def splitInt(n):
 	s = "+"
 
 	if n == 0:
-
-		return [0]
+		l = [0]
+		return s, l
 
 	if n < 0:
 
@@ -173,13 +173,12 @@ def isPalindromic(l):
 
 
 
-##############################################
-# Checks if a given number is a perfect square
-##############################################
-def isSquare(n):
+##########################################
+# Checks if a given number is a power of n
+##########################################
+def isPower(n, p):
 
-	return round(sqrt(n))**2 == n
-
+	return round(n**(1/p))**p == n
 
 
 #####################################################################

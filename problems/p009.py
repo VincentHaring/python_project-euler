@@ -21,7 +21,7 @@ def p9():
 
 			c2 = a**2 + b**2
 
-			if isSquare(c2):
+			if isPower(c2, 2):
 
 				c = sqrt(c2)
 
