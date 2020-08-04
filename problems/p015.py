@@ -1,7 +1,9 @@
 """
 Problem 15
 
-Work out the first ten digits of the sum of the one-hundred 50-digit numbers in the file p013.txt.
+Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
+
+How many such routes are there through a 20×20 grid?
 """
 
 from helper import *

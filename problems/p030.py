@@ -21,7 +21,7 @@ def p30():
 
 	p = 5
 
-	l = 1000000
+	l = 200000
 
 	for i in range(2,l):
 

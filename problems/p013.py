@@ -22,7 +22,7 @@ def p13():
 
 		r = s%10
 
-		carry = (s-r)/10
+		carry = int((s-r)/10)
 
 		t.insert(0, r)
 

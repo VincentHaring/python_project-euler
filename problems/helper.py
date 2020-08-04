@@ -106,7 +106,7 @@ def sieve(n):
 
 
 ###############################################################################
-# Splits an integer into a list and sign, ( 1,234 becomes ([1, 2, 3, 4], "+") )
+# Splits an integer into a list and sign, ( 1,234 becomes ('+',[1, 2, 3, 4]) )
 ###############################################################################
 def splitInt(n):
 
@@ -122,12 +122,18 @@ def splitInt(n):
 		n = abs(n)
 		s = "-"
 
-	p = 10
+	t = str(n)
 
-	while n > 0:
+	for c in t:
 
-		l.insert(0,n%p)
-		n = int(n/p)
+		l.append(int(c))
+
+	# p = 10
+
+	# while n > 0:
+
+	# 	l.insert(0,n%p)
+	# 	n = int(n/p)
 
 	return s, l
 
@@ -207,5 +213,66 @@ def readNumbersIntoList(file):
 
 	return n
 
+
+######################
+#
+######################
+def removeLeadingZeroes(n):
+
+	while n[0] == 0:
+
+		if len(n) == 1:
+
+			return n
+
+		n.pop(0)
+
+	return n
+
+######################################################################################################
+# Reads numbers from an array into list of numbers (in splitInt format) with any leading zeros removed
+######################################################################################################
+def readNumbersIntoArray(file):
+
+	"""
+	12 34
+	56 78
+	90
+
+	becomes:
+
+	[
+	[	[ 1 , 2 ] , [ 3 , 4 ]	],
+	[	[ 5 , 6 ] , [ 7 , 8 ]	],
+	[	[ 9 , 0 ]	]
+	]
+
+	"""
+
+	f = open(file, 'r')
+
+	n = []
+
+	for row in f:
+
+		r = []
+
+		row = row.strip()
+
+		# print(row)
+
+		for num in row.split():
+
+			num = splitInt(int(num))
+
+			num = removeLeadingZeroes(num[1])
+
+			r.append(num)
+
+		n.append(r)
+
+	f.close()
+
+	return n
 
 
