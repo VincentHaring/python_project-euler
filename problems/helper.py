@@ -65,13 +65,33 @@ def isPrime(n):
 #########################################
 def factors(n):
 
-	f = []
+	f = [1]
 
-	for i in range(1,n+1):
+	r = floor(sqrt(n))
+
+	if n%2 == 0:
+
+		start = 2
+		step = 1
+
+	else:
+
+		start = 3
+		step = 2
+
+	for i in range(start,r+1,step):
 
 		if n%i == 0:
 
 			f.append(i)
+
+			j = int(n/i)
+
+			if i != j:
+
+				f.append(j)
+
+	f.sort()
 
 	return f
 
@@ -214,9 +234,9 @@ def readNumbersIntoList(file):
 	return n
 
 
-######################
-#
-######################
+###############################################################
+# Removes leading zeros for a given number (in splitInt format)
+###############################################################
 def removeLeadingZeroes(n):
 
 	while n[0] == 0:
@@ -274,5 +294,13 @@ def readNumbersIntoArray(file):
 	f.close()
 
 	return n
+
+
+########################################################
+# Returns value of word/name using a=1, b=2, etc scoring
+########################################################
+def nameScore(n):
+
+	return sum([ord(c) - 96 for c in n.lower()])
 
 
