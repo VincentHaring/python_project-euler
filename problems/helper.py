@@ -7,6 +7,8 @@ I'm sure there are existing libraries with these, but where's the fun in that.
 
 from math import *
 import numpy as np
+import itertools
+import collections
 
 ################################################################################
 # Takes integer n and returns list f of prime factors and p of powers of factors
@@ -123,6 +125,74 @@ def sieve(n):
 	return a
 
 
+
+
+
+#########################################
+# List all primes up to a given integer n
+#########################################
+def primesBelow(n):
+
+	s = sieve(n)
+
+	a = []
+
+	for i, j in enumerate(s):
+		if j:
+			a.append(i+2)
+
+	return a
+
+
+
+
+#####################################################
+# Returns all unique permutations for a given integer
+#####################################################
+def uniquePermutations(n):
+
+	s, a = splitInt(n)
+
+	p_list = list(itertools.permutations(a))
+
+	p = []
+
+	for l in p_list:
+		if l[0] != 0:
+			t = joinInt(s,l)
+			if t not in p:
+				p.append(t)
+
+	p.sort()
+
+	return p
+
+
+
+##########################################################################
+# Returns the differences between all ints in an array and their frequency
+##########################################################################
+def deltas(a):
+
+	d = []
+
+
+	l = len(a)
+
+	if l < 2:
+		return a
+
+	for x in range(0,l-1):
+		c = []
+		for y in range(x+1,l):
+			c.append(abs(a[x]-a[y]))
+		
+		for z in c:
+			d.append(z)
+
+	f = collections.Counter(d)
+
+	return dict(f)
 
 
 ###############################################################################
