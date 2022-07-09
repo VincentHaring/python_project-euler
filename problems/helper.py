@@ -218,13 +218,6 @@ def splitInt(n):
 
 		l.append(int(c))
 
-	# p = 10
-
-	# while n > 0:
-
-	# 	l.insert(0,n%p)
-	# 	n = int(n/p)
-
 	return s, l
 
 
@@ -267,6 +260,33 @@ def isPalindromic(l):
 
 	return True
 
+
+
+###########################################################
+# Returns b**p as a list, if d provided, then last d digits
+###########################################################
+def listPower(b,p,d=0):
+
+	bs = str(bin(p).replace("0b",""))
+	l = len(bs)
+	t = 1
+
+	powers = []
+
+	for i in range(0,l):
+		powers.insert(0,b**(2**i))
+
+	for i, j in enumerate(bs):
+		if j=="1":
+			t *= powers[i]
+
+	if d > 0:	
+
+		t = t%(10**d)
+
+	e = splitInt(t)[1]
+
+	return e
 
 
 ##########################################
@@ -372,5 +392,212 @@ def readNumbersIntoArray(file):
 def nameScore(n):
 
 	return sum([ord(c) - 96 for c in n.lower()])
+
+
+
+#################################################
+#Returns vector as tuple given 2 points as tuples
+#################################################
+def vector(a,b):
+
+	return (b[0]-a[0],b[1]-a[1])
+
+
+###################################
+#Returns dot product of two vectors
+###################################
+def dotProduct(a,b):
+
+	return a[0]*b[0]+a[1]*b[1]
+
+
+############################################################
+# Returns boolean whether given points form a right triangle
+############################################################
+def isRightTriangle(a,b,c):
+
+	ab = vector(a,b)
+	bc = vector(b,c)
+	ac = vector(a,c)
+
+	dotProducts = []
+
+	dotProducts.append(dotProduct(ab,bc))
+	dotProducts.append(dotProduct(bc,ac))
+	dotProducts.append(dotProduct(ab,ac))
+
+	if 0 in dotProducts:
+		return True
+
+	else:
+		return False
+
+
+############################################################################
+# Returns boolean of whether given point falls in triangle given by 3 points
+############################################################################
+def pointInTriangle(a,b,c,p):
+
+	AP_AB = crossProduct(vector(a,p),vector(a,b))
+	BP_BC = crossProduct(vector(b,p),vector(b,c))
+	CP_CA = crossProduct(vector(c,p),vector(c,a))
+
+	signs = [sign(AP_AB),sign(BP_BC),sign(CP_CA)]
+
+	# Point on corner
+	if signs.count(0) == 2:
+
+		return True
+
+	# Point inside Triangle
+	if signs.count(0) == 1:
+
+		x = filter (lambda a: a != 0, signs)
+
+		if x[0] == x[1]:
+
+			return True
+
+	if signs.count(0) == 0:
+
+		if signs[0] == signs[1] and signs[1] == signs[2]:
+
+			return True
+
+
+	return False
+
+
+############################################
+# Returns cross product of two vectors A x B
+############################################
+def crossProduct(A,B):
+
+	return (A[0] * B[1]) - (A[1] * B[0])
+
+
+##########################
+# Returns sign of a number
+##########################
+def sign(a):
+
+	if a > 0:
+		return 1
+	elif a == 0:
+		return 0
+	else:
+		return -1
+
+
+
+######################################################
+# Returns reciprocal of n with number repeating digits
+######################################################
+def recip(n):
+
+	reciprocal = 0
+	digits = 0
+
+	remainders = []
+
+	rem = 1
+	index = 0
+
+	rep = False
+
+	for i in range(n):
+
+		if rem == 0:
+			break
+
+		while rem <= n:
+			index += 1
+			rem *= 10
+
+		if rem in remainders:
+			rep = True
+			s = remainders.index(rem)
+			break
+
+		remainders.append(rem)
+
+		new_rem = rem%n
+
+		reciprocal += 10**(-1*index) * ((rem-new_rem)/n)
+
+		rem = new_rem
+
+
+	if rep:
+		digits = len(remainders) - s
+
+
+	return (reciprocal,digits)
+
+
+############################################################################
+# Returns roots of a quadratic ax**2 + bx + c = 0 as array of complex tuples
+############################################################################
+
+def solveQuadratic(a,b,c):
+
+
+	dis = b*b - 4*a*c
+
+
+	if dis > 0:
+
+		r1 = ((-b + dis**0.5)/(2*a),0)
+		r2 = ((-b - dis**0.5)/(2*a),0)
+
+		r = [r1,r2]
+
+	elif dis == 0:
+
+		r1 = (-b/(2*a),0)
+
+		r = [r1,r1]
+
+	else:
+
+		r1 = (-b/(2*a),(abs(dis)**0.5)/(2*a))
+		r2 = (-b/(2*a),-(abs(dis)**0.5)/(2*a))
+
+		r = [r1,r2]
+
+	return r
+
+
+
+#############################################
+# Return whether a given number is pentagonal
+#############################################
+def isPentagonal(pn):
+
+	r = solveQuadratic(1.5,-0.5,-pn)
+
+	for root in r:
+
+		if root[0].is_integer() and root[1] == 0:
+
+			return True
+
+	return False
+
+
+###############################################
+# Returns pentagonal number pn for given base n
+###############################################
+
+def pentagonal(n):
+
+	return n*(3*n-1)/2
+
+
+
+
+
+
+
 
 
